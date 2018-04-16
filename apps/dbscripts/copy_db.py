@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-import object_recognition
-from object_recognition import tools as dbtools
+
+# import object_recognition_core
+import object_recognition_core.db.tools as dbtools
 import couchdb
 import argparse
 
@@ -11,7 +12,7 @@ def parse_args():
     parser.add_argument('--remote_collection',
                    dest='remote_collection', type=str,
                    help='Remote collection.')
-    object_recognition.dbtools.add_db_arguments(parser)
+    dbtools.add_db_arguments(parser)
     args = parser.parse_args()
     return args
 
