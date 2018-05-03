@@ -30,6 +30,7 @@ namespace object_recognition_core
       declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs)
       {
         Observation::declare(inputs, true); //required
+        inputs.declare<std::string>("object_id", "The object id, to associate this frame with.");
       }
 
       ObservationInserter()
@@ -65,6 +66,10 @@ namespace object_recognition_core
         // Use the frame_number tendril if provided
         if (inputs.find("frame_number")->second->user_supplied())
           frame_number = inputs.get<int>("frame_number");
+
+        // Use the object_id tendril if provided
+        if (inputs.find("object_id")->second->user_supplied())
+          object_id = inputs.get<std::string>("object_id");
 
         std::cout << "Inserting frame: " << frame_number << std::endl;
         obs.frame_number = frame_number++;
